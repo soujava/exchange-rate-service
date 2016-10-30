@@ -5,6 +5,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 
@@ -25,6 +26,14 @@ public class ECBRate implements Serializable {
 
     public double getRate() {
         return rate;
+    }
+
+    public LocalDate getTime() {
+        return id.getTime();
+    }
+
+    public String getCurrency() {
+        return id.getCurrency();
     }
 
     @Override
@@ -62,4 +71,6 @@ public class ECBRate implements Serializable {
         ecb.rate = rate;
         return ecb;
     }
+
+
 }
