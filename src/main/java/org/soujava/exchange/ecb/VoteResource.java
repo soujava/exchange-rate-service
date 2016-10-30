@@ -1,4 +1,4 @@
-package org.soujava.microprofile.demo;
+package org.soujava.exchange.ecb;
 
 
 import javax.enterprise.context.ApplicationScoped;
