@@ -29,7 +29,6 @@
             <property name="openjpa.DataCache" value="true"/>
             <property name="openjpa.RemoteCommitProvider" value="sjvm"/>
             <property name="openjpa.QueryCache" value="CacheSize=1000, SoftReferenceSize=100"/>
-            <property name="openjpa.Log" value="SQL=Trace" />
         </properties>
     </persistence-unit>
 </persistence>
