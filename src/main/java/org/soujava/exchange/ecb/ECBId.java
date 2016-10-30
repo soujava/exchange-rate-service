@@ -1,10 +1,7 @@
 package org.soujava.exchange.ecb;
 
 
-import org.soujava.exchange.converter.LocalDateConverter;
-
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,7 +12,6 @@ import java.util.Objects;
 public class ECBId implements Serializable {
 
     @Column
-    @Convert(converter = LocalDateConverter.class)
     private Date time;
 
     @Column
