@@ -52,7 +52,11 @@ public class ECBRate implements Serializable {
                 '}';
     }
 
-    public static ECBRate of(ECBId id, double rate) {
+    public static ECBBuilder builder() {
+        return new ECBBuilder();
+    }
+
+    static ECBRate of(ECBId id, double rate) {
         ECBRate ecb = new ECBRate();
         ecb.id = Objects.requireNonNull(id, "id is required");
         ecb.rate = rate;

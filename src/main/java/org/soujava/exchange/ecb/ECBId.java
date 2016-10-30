@@ -1,21 +1,29 @@
 package org.soujava.exchange.ecb;
 
 
+import org.soujava.exchange.converter.LocalDateConverter;
+
 import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
+@Embeddable
 public class ECBId implements Serializable {
 
     @Column
-    private LocalDate time;
+    @Convert(converter = LocalDateConverter.class)
+    private Date time;
+
     @Column
     private String currency;
 
 
     public LocalDate getTime() {
-        return time;
+        return new java.sql.Date(time.getTime()).toLocalDate();
     }
 
     public String getCurrency() {
@@ -48,12 +56,12 @@ public class ECBId implements Serializable {
                 '}';
     }
 
-    public static ECBId of(LocalDate time, String currency) {
+    static ECBId of(LocalDate time, String currency) {
         Objects.requireNonNull(time, "time is required");
         Objects.requireNonNull(currency, "currency is required");
         ECBId id = new ECBId();
         id.currency = currency;
-        id.time = time;
+        id.time = java.sql.Date.valueOf(time);
         return id;
     }
 }

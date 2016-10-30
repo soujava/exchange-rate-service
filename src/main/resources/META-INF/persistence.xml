@@ -22,13 +22,14 @@
     <persistence-unit name="exchange-unit">
         <jta-data-source>exchangeDatabase</jta-data-source>
         <non-jta-data-source>exchangeDatabaseUnmanaged</non-jta-data-source>
-        <class>org.soujava.exchange.ecb.Movie</class>
+        <class>org.soujava.exchange.ecb.ECBRate</class>
 
         <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
             <property name="openjpa.DataCache" value="true"/>
             <property name="openjpa.RemoteCommitProvider" value="sjvm"/>
             <property name="openjpa.QueryCache" value="CacheSize=1000, SoftReferenceSize=100"/>
+            <property name="openjpa.Log" value="SQL=Trace" />
         </properties>
     </persistence-unit>
 </persistence>
