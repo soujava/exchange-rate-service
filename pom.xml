@@ -29,7 +29,6 @@
             <artifactId>sabot</artifactId>
             <version>0.9</version>
         </dependency>
-
     </dependencies>
 
     <build>
