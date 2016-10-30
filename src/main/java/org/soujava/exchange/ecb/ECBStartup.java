@@ -32,6 +32,9 @@ class ECBStartup {
     @Inject
     private ECBReader reader;
 
+    @Inject
+    private ECBCache ecbCache;
+
     @PostConstruct
     public void start() throws ParserConfigurationException, SAXException, IOException {
         LOGGER.info("Europe Central Bank starter begging");
@@ -42,6 +45,7 @@ class ECBStartup {
         LOGGER.info("Found rates size: " + rates.size());
         repository.save(rates);
         LOGGER.info("ECB process finished");
+        ecbCache.feed(rates);
 
     }
 }
