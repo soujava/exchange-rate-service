@@ -1,6 +1,7 @@
 package org.soujava.exchange;
 
 
+import javax.enterprise.context.ApplicationScoped;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.logging.Logger;
 
+@ApplicationScoped
 public class ResourceDownloader {
 
     private static final Logger LOGGER = Logger.getLogger(ResourceDownloader.class.getName());

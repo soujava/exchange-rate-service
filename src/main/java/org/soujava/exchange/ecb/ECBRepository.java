@@ -29,4 +29,8 @@ public class ECBRepository {
         query.setParameter("time", java.sql.Date.valueOf(localDate));
         return query.getResultList();
     }
+
+    public void save(List<ECBRate> rates) {
+        rates.forEach(this::save);
+    }
 }
