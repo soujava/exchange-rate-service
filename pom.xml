@@ -24,6 +24,12 @@
             <version>${java.ee.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.tomitribe</groupId>
+            <artifactId>sabot</artifactId>
+            <version>0.9</version>
+        </dependency>
+
     </dependencies>
 
     <build>
