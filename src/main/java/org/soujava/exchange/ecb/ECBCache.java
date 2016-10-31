@@ -1,17 +1,15 @@
 package org.soujava.exchange.ecb;
 
 
-import com.hazelcast.core.HazelcastInstance;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -21,15 +19,12 @@ class ECBCache {
 
     private static final String MOST_RECENT = "today";
 
-    @Inject
-    private HazelcastInstance instance;
-
-    private Map<String, List<ECBRate>> cache;
+    private Map<String, List<ECBRate>> cache = new ConcurrentHashMap<>();
 
 
     @PostConstruct
     void init(){
-        cache = instance.getMap(ECB_CACHE_NAME);
+     //   cache = instance.getMap(ECB_CACHE_NAME);
     }
 
     public List<ECBRate> getMostRecent() {
