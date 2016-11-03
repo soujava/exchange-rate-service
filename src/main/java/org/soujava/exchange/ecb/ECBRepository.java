@@ -33,4 +33,8 @@ public class ECBRepository {
     public void save(List<ECBRate> rates) {
         rates.forEach(this::save);
     }
+
+    public void update(List<ECBRate> rates) {
+        entityManager.merge(rates);
+    }
 }

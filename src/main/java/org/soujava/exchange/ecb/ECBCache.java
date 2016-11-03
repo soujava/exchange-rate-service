@@ -1,14 +1,9 @@
 package org.soujava.exchange.ecb;
 
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -22,10 +17,6 @@ class ECBCache {
     private Map<String, List<ECBRate>> cache = new ConcurrentHashMap<>();
 
 
-    @PostConstruct
-    void init(){
-     //   cache = instance.getMap(ECB_CACHE_NAME);
-    }
 
     public List<ECBRate> getMostRecent() {
         return cache.getOrDefault(MOST_RECENT, Collections.emptyList());
@@ -38,5 +29,14 @@ class ECBCache {
             List<ECBRate> ecbRates = ratesGroupByTime.get(localDate);
             cache.put(MOST_RECENT, ecbRates);
         });
+    }
+
+    private Optional<LocalDate> getMostRecentDate() {
+        return getMostRecent().stream().map(ECBRate::getTime).findFirst();
+    }
+
+    public boolean isCacheDeprecated(LocalDate localDate) {
+        Optional<LocalDate> mostRecentDateCached = getMostRecentDate();
+        return !mostRecentDateCached.isPresent() || mostRecentDateCached.get().isBefore(localDate);
     }
 }
