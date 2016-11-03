@@ -45,12 +45,13 @@ public class ECBRate implements Serializable {
             return false;
         }
         ECBRate ecbRate = (ECBRate) o;
-        return Objects.equals(id, ecbRate.id);
+        return Double.compare(ecbRate.rate, rate) == 0 &&
+                Objects.equals(id, ecbRate.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id, rate);
     }
 
     @Override
