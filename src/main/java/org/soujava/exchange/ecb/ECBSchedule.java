@@ -6,18 +6,17 @@ import org.soujava.exchange.ResourceDownloader;
 import org.xml.sax.SAXException;
 
 import javax.ejb.Schedule;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@Singleton
+@Stateless
 class ECBSchedule {
 
 
@@ -38,7 +37,7 @@ class ECBSchedule {
     @Inject
     private ECBCache ecbCache;
 
-    @Schedule(minute = "*/1")
+    @Schedule(hour = "*", minute = "*/1")
     public void sync() throws IOException, SAXException {
         LOGGER.info("Schedule started");
         byte[] downloaded = downloader.download(configuration.getEcbDaily());
