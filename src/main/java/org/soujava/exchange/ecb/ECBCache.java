@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 class ECBCache {
 
-    private static final String ECB_CACHE_NAME = "ecb-cache";
-
     private static final String MOST_RECENT = "today";
 
     private Map<String, List<ECBRate>> cache = new ConcurrentHashMap<>();
