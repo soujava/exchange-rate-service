@@ -19,7 +19,6 @@ public class ECBRepository {
 
 
     public void save(ECBRate rate) {
-        LOGGER.info("Saving new rate: " + rate);
         entityManager.persist(rate);
     }
 
@@ -31,6 +30,7 @@ public class ECBRepository {
     }
 
     public void save(List<ECBRate> rates) {
+        LOGGER.info("Saving rate: " + rates.size());
         rates.forEach(this::save);
     }
 
