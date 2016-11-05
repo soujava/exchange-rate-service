@@ -16,23 +16,6 @@ public class Configuration {
     @Config(value = "ecb-full-history")
     private String ecbFullHistory;
 
-    @Inject
-    @Config(value = "query-rate")
-    private String queryRate;
-
-
-    @Inject
-    @Config(value = "query-historic")
-    private String queryHistoric;
-
-
-    public String getQueryRate() {
-        return queryRate;
-    }
-
-    public String getQueryHistoric() {
-        return queryHistoric;
-    }
 
     public String getEcbDaily() {
         return ecbDaily;

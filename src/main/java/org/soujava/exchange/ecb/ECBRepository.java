@@ -1,7 +1,5 @@
 package org.soujava.exchange.ecb;
 
-import org.soujava.exchange.Configuration;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -21,7 +19,7 @@ public class ECBRepository {
     private EntityManager entityManager;
 
     @Inject
-    private Configuration configuration;
+    private SQLQuery configuration;
 
 
     public void save(ECBRate rate) {
