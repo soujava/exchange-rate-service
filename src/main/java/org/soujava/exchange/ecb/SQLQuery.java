@@ -2,8 +2,10 @@ package org.soujava.exchange.ecb;
 
 import org.tomitribe.sabot.Config;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+@ApplicationScoped
 class SQLQuery {
 
     @Inject
