@@ -31,4 +31,10 @@ public class ECBResource {
         return ECBRateRepresentation.of(repository.getRates(LocalDate.parse(date)));
     }
 
+    @GET
+    @Path("{date1}/{date2}")
+    public ECBRateRepresentation getRateFromDay(@PathParam("date1") String date, @PathParam("date2") String date2) {
+        return ECBRateRepresentation.of(repository.getRates(LocalDate.parse(date),LocalDate.parse(date2)));
+    }
+
 }

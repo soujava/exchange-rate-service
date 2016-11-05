@@ -22,10 +22,10 @@ public class ECBRepository {
         entityManager.persist(rate);
     }
 
-    public List<ECBRate> getRates(LocalDate localDate) {
-        LOGGER.info("finding rates from day: " + localDate);
+    public List<ECBRate> getRates(LocalDate date) {
+        LOGGER.info("finding rates from day: " + date);
         Query query = entityManager.createQuery("select ecb from ECBRate ecb where ecb.id.time = :time");
-        query.setParameter("time", java.sql.Date.valueOf(localDate));
+        query.setParameter("time", java.sql.Date.valueOf(date));
         return query.getResultList();
     }
 
@@ -36,5 +36,12 @@ public class ECBRepository {
 
     public void update(List<ECBRate> rates) {
         entityManager.merge(rates);
+    }
+
+    public List<ECBRate> getRates(LocalDate date, LocalDate date1) {
+        Query query = entityManager.createQuery("select ecb from ECBRate ecb where BETWEEN ecb.id.time = :time AND ecb.id.time = :time1");
+        query.setParameter("time", java.sql.Date.valueOf(date));
+        query.setParameter("time1", java.sql.Date.valueOf(date1));
+        return query.getResultList();
     }
 }
