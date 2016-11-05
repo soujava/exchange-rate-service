@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,7 +20,7 @@ public class ECBRepository {
     private EntityManager entityManager;
 
     @Inject
-    private SQLQuery configuration;
+    private SQLQuery sqlQuery;
 
 
     public void save(ECBRate rate) {
@@ -28,7 +29,7 @@ public class ECBRepository {
 
     public List<ECBRate> getRates(LocalDate date) {
         LOGGER.info("finding rates from day: " + date);
-        Query query = entityManager.createQuery(configuration.getQueryRate());
+        Query query = entityManager.createQuery(sqlQuery.getQueryRate());
         query.setParameter("time", java.sql.Date.valueOf(date));
         return query.getResultList();
     }
@@ -42,10 +43,24 @@ public class ECBRepository {
         entityManager.merge(rates);
     }
 
+    public boolean isNotEmpty() {
+        Query query = entityManager.createNativeQuery(sqlQuery.getCountQuery());
+        Number count = (Number) query.getSingleResult();
+        return count.intValue() > 0;
+    }
+
     public List<ECBRate> getRates(LocalDate date, LocalDate date1) {
-        Query query = entityManager.createQuery(configuration.getQueryHistoric());
+        Query query = entityManager.createQuery(sqlQuery.getQueryHistoric());
         query.setParameter("time", java.sql.Date.valueOf(date));
         query.setParameter("time1", java.sql.Date.valueOf(date1));
         return query.getResultList();
+    }
+
+    public List<ECBRate> getMostRecentRates() {
+        Query query = entityManager.createQuery(sqlQuery.getDateMostRecent());
+        query.setMaxResults(1);
+        Date date = (Date) query.getSingleResult();
+        LocalDate localDate = new java.sql.Date(date.getTime()).toLocalDate();
+        return getRates(localDate);
     }
 }
