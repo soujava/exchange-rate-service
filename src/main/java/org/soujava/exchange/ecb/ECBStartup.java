@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 @Startup
 class ECBStartup {
 
-    private static Logger LOGGER  = Logger.getLogger(ECBStartup.class.getName());
+    private static Logger LOGGER = Logger.getLogger(ECBStartup.class.getName());
 
     @Inject
     private Configuration configuration;
@@ -38,6 +38,13 @@ class ECBStartup {
     @PostConstruct
     public void start() throws ParserConfigurationException, SAXException, IOException {
         LOGGER.info("Europe Central Bank starter begging");
+        if (repository.isNotEmpty()) {
+            LOGGER.info("Data already loaded jumping this step");
+            LOGGER.info("Feed cache");
+            List<ECBRate> mostRecentRates = repository.getMostRecentRates();
+            ecbCache.feed(mostRecentRates);
+            return;
+        }
         LOGGER.info("Start to download full ECB history");
         byte[] downloaded = downloader.download(configuration.getEcbFullHistory());
         LOGGER.info("Download the ECB full history completed");

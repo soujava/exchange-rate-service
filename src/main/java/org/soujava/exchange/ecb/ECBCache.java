@@ -15,7 +15,6 @@ class ECBCache {
     private Map<String, List<ECBRate>> cache = new ConcurrentHashMap<>();
 
 
-
     public List<ECBRate> getMostRecent() {
         return cache.getOrDefault(MOST_RECENT, Collections.emptyList());
     }
