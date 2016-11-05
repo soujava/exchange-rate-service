@@ -20,6 +20,7 @@ class ECBCache {
         return cache.getOrDefault(MOST_RECENT, Collections.emptyList());
     }
 
+
     public void feed(List<ECBRate> rates) {
         Map<LocalDate, List<ECBRate>> ratesGroupByTime = rates.stream().collect(Collectors.groupingBy(ECBRate::getTime));
         Optional<LocalDate> mostRecent = ratesGroupByTime.keySet().stream().sorted(Comparator.<LocalDate>naturalOrder().reversed()).findFirst();

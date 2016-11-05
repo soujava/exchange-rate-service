@@ -18,10 +18,10 @@
     under the License.
 -->
 <tomee>
-  <Resource id="HSQLDB Database" type="DataSource">
+  <Resource id="exchangeDatabase" type="DataSource">
     JdbcDriver   org.postgresql.Driver
-    JdbcUrl  jdbc:postgresql://localhost/exchange
-    UserName     soujava2016
-    Password     user_exchange
+    JdbcUrl  jdbc:postgresql://172.17.0.2:5432/exchange
+    UserName     postgres
+    Password     admin
   </Resource>
 </tomee>
