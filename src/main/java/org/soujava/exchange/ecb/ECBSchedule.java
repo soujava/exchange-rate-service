@@ -39,7 +39,7 @@ class ECBSchedule {
 
     @Schedule(hour = "*", minute = "*/1")
     public void sync() throws IOException, SAXException {
-        LOGGER.info("Schedule started");
+        LOGGER.info("ECB Schedule started");
         byte[] downloaded = downloader.download(configuration.getEcbDaily());
         List<ECBRate> ecbRates = reader.read(downloaded);
         Optional<LocalDate> recentDateDownloaded = ecbRates.stream().map(ECBRate::getTime).findFirst();
@@ -63,7 +63,7 @@ class ECBSchedule {
         List<ECBRate> ratesCached = ecbCache.getMostRecent();
         List<ECBRate> itemsUpdate = ecbRates.stream().filter(e -> !ratesCached.contains(e)).collect(toList());
         if (itemsUpdate.isEmpty()) {
-            LOGGER.info("There is not ecb to update on database");
+            LOGGER.info("There is not ECB to update on database");
         } else {
             ecbCache.feed(ecbRates);
             repository.update(itemsUpdate);
