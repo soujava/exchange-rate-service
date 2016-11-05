@@ -19,9 +19,9 @@
 -->
 <tomee>
   <Resource id="HSQLDB Database" type="DataSource">
-    JdbcDriver org.hsqldb.jdbcDriver
-    JdbcUrl jdbc:hsqldb:file:target/db/exchange
-    UserName sa
-    Password
+    JdbcDriver   org.postgresql.Driver
+    JdbcUrl  jdbc:postgresql://localhost/exchange
+    UserName     soujava2016
+    Password     user_exchange
   </Resource>
 </tomee>
