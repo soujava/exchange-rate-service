@@ -6,24 +6,28 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-class SQLQuery {
+class ECBSQuery {
 
     @Inject
-    @Config(value = "query-rate")
+    @Config(value = "query-ecb-rate")
     private String queryRate;
 
 
     @Inject
-    @Config(value = "query-historic")
+    @Config(value = "query-ecb-historic")
     private String queryHistoric;
 
     @Inject
-    @Config(value = "query-count")
+    @Config(value = "query-ecb-count")
     private String countQuery;
 
     @Inject
-    @Config(value = "query-date-most-recent")
+    @Config(value = "query-ecb-date-most-recent")
     private String dateMostRecent;
+
+    @Inject
+    @Config(value = "query-ecb-range-count")
+    private String countRange;
 
     public String getQueryRate() {
         return queryRate;
@@ -39,5 +43,9 @@ class SQLQuery {
 
     public String getDateMostRecent() {
         return dateMostRecent;
+    }
+
+    public String getCountRange() {
+        return countRange;
     }
 }
