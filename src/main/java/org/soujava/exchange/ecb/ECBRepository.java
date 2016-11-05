@@ -1,6 +1,9 @@
 package org.soujava.exchange.ecb;
 
+import org.soujava.exchange.Configuration;
+
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -17,6 +20,9 @@ public class ECBRepository {
     @PersistenceContext(unitName = "exchange-unit")
     private EntityManager entityManager;
 
+    @Inject
+    private Configuration configuration;
+
 
     public void save(ECBRate rate) {
         entityManager.persist(rate);
@@ -24,7 +30,7 @@ public class ECBRepository {
 
     public List<ECBRate> getRates(LocalDate date) {
         LOGGER.info("finding rates from day: " + date);
-        Query query = entityManager.createQuery("select ecb from ECBRate ecb where ecb.id.time = :time");
+        Query query = entityManager.createQuery(configuration.getQueryRate());
         query.setParameter("time", java.sql.Date.valueOf(date));
         return query.getResultList();
     }
@@ -39,7 +45,7 @@ public class ECBRepository {
     }
 
     public List<ECBRate> getRates(LocalDate date, LocalDate date1) {
-        Query query = entityManager.createQuery("select ecb from ECBRate ecb where BETWEEN ecb.id.time = :time AND ecb.id.time = :time1");
+        Query query = entityManager.createQuery(configuration.getQueryHistoric());
         query.setParameter("time", java.sql.Date.valueOf(date));
         query.setParameter("time1", java.sql.Date.valueOf(date1));
         return query.getResultList();
